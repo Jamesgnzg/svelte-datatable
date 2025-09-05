@@ -12,10 +12,13 @@
         },
         {
           access: 'streetAddress',
-          render: ({ streetAddress, city }):string => `${streetAddress}, ${city}`
+          render: ({ streetAddress, city }: {streetAddress: string, city: string}):string => `${streetAddress}, ${city}`
         },
         {
           access: 'state',
+        },
+        {
+          access: 'missionStatement'
         }
       ]} />
     </div>
