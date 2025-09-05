@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Column } from "../interface/column";
   import type { ColumnDataMapping } from "../interface/columnMapping";
+  import filterIcon from "../assets/filter.png";
 
     const { companies, columns} = $props();
     const columnDataMapping:ColumnDataMapping<Column> = {};
@@ -62,7 +63,9 @@
                        <div class="flex justify-between">
                             { header.name }
                             {#if header.columnFilter}
-                                <button>Filter</button>
+                                <button class="p-1 -mt-1 -mr-5 cursor-pointer rounded-sm hover:bg-gray-200">
+                                    <img src={filterIcon} aria-label="filter-icon" height={15} width={15} alt="filter-icon"/>
+                                </button>
                             {/if}
                        </div>
                     </th>
