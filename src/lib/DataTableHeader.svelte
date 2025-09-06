@@ -13,12 +13,12 @@
     <div class="flex justify-between">
         { header.name }
         {#if header.columnFilter}
-            <div class="flex flex-col">
+            <div class="flex flex-col items-center">
                 <button class="p-1 -mt-1 -mr-5 cursor-pointer rounded-sm hover:bg-gray-200" onclick={toggleFilter}>
                     <img src={filterIcon} aria-label="filter-icon" height={15} width={15} alt="filter-icon"/>
                 </button>
                 {#if filterOpen}
-                    <div class="absolute border-1 rounded-md p-5 bg-gray-50 border-gray-100 mt-5 shadow-sm">
+                    <div class="absolute border-1 rounded-md p-5 bg-gray-50 border-gray-100 mt-8 shadow-sm">
                         <label for="price" class="block text-sm/6 font-medium text-gray-900">Price</label>
                         <div class="mt-2">
                             <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
