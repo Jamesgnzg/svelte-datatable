@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Column } from "../interface/column";
   import type { ColumnDataMapping } from "../interface/columnMapping";
-  import filterIcon from "../assets/filter.png";
+  import DataTableHeader from "./DataTableHeader.svelte";
 
     const { companies, columns} = $props();
     const columnDataMapping:ColumnDataMapping<Column> = {};
@@ -59,16 +59,7 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 {#each columnHeaders as header}
-                    <th scope="col" class="px-6 py-3">
-                       <div class="flex justify-between">
-                            { header.name }
-                            {#if header.columnFilter}
-                                <button class="p-1 -mt-1 -mr-5 cursor-pointer rounded-sm hover:bg-gray-200">
-                                    <img src={filterIcon} aria-label="filter-icon" height={15} width={15} alt="filter-icon"/>
-                                </button>
-                            {/if}
-                       </div>
-                    </th>
+                    <DataTableHeader header={header} />
                 {/each}
             </tr>
         </thead>

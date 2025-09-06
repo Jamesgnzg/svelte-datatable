@@ -16,6 +16,7 @@
         },
         {
           access: 'state',
+          filter: (state:string) => state !== null,
         },
         {
           access: 'missionStatement'
