@@ -1,9 +1,10 @@
 <script lang="ts">
   import type { Column } from "../interface/column";
   import type { ColumnDataMapping } from "../interface/columnMapping";
+  import type { company } from "../interface/companies";
   import DataTableHeader from "./DataTableHeader.svelte";
 
-    const { companies, columns} = $props();
+    const { companies, columns }: {companies: company[], columns:Column[]} = $props();
     const columnDataMapping:ColumnDataMapping<Column> = {};
     let columnHeaders: any[] = [];
     let tableData: any[] = [];
@@ -14,20 +15,20 @@
     }
 
     const createColumnHeaders = () => {
-        columns.forEach((column: { access: string; filter: Function; }) => {
+        columns.forEach((column) => {
             columnHeaders.push({
-                name: separateWordsByCase(column.access),
+                name: separateWordsByCase(column.accessor),
                 columnFilter: column?.filter
             })
         })
     }
 
     const createColumnDataMapping = () => {
-        columns.forEach((column: { access: string; filter: Function; render: Function; }) => {
-            columnDataMapping[column.access] = {
-                accessor: column.access,
-                filter: column.filter,
-                render: column.render
+        columns.forEach((column) => {
+            columnDataMapping[column.accessor] = {
+                accessor: column.accessor,
+                filter: column?.filter,
+                render: column?.render
             } 
         })
     }
