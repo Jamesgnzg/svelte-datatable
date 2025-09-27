@@ -10,13 +10,16 @@
         },
         {
           accessor: 'streetAddress',
+          filter: Filter,
           render: ({ streetAddress, city }: {streetAddress: string, city: string}):string => `${streetAddress}, ${city}`
         },
         {
           accessor: 'state',
+          filter: Filter,
         },
         {
-          accessor: 'missionStatement'
+          accessor: 'missionStatement',
+          filter: Filter,
         }
       ]
 </script>
