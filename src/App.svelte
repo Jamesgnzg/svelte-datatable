@@ -2,15 +2,15 @@
   import { companies } from "./data/Companies";
   import DataTable from "./lib/DataTable.svelte";
   import Filter from "./lib/Filter.svelte";
+  import NameFilter from "./lib/NameFilter.svelte";
 
   const columnsConfig = [
         {
             accessor: 'name',
-            filter: Filter,
+            filter: NameFilter,
         },
         {
           accessor: 'streetAddress',
-          filter: Filter,
           render: ({ streetAddress, city }: {streetAddress: string, city: string}):string => `${streetAddress}, ${city}`
         },
         {
