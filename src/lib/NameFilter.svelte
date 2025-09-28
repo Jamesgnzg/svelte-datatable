@@ -1,3 +1,16 @@
-<div>
-    <input type="text" placeholder="Filter Name" class="p-2"/>
+<script lang="ts">
+    import search from "../assets/search.png";
+</script>
+
+<div class="normal-case">
+    <label for="name" class="text-base rtl:text-right font-bold block text-gray-700 dark:text-gray-200 space-y-2 mb-1">
+        Company
+    </label>
+    <p class="mb-2 font-light text-sm">
+        Show companies whose names include the specified text
+    </p>
+    <div class="flex w-full gap-1 border border-gray-300 px-2 py-2 focus-within:border-orange-500 rounded-lg">
+        <img src={search} class="bg-white" aria-label="search-icon" height={5} width={20} alt="search-icon"/>
+        <input name="name" class="text-sm text-gray-500 font-normal focus:outline-none" placeholder="Search company..."/>
+    </div>
 </div>

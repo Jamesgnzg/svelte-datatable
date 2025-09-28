@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fade } from "svelte/transition";
+    import { fade } from "svelte/transition";
     import filterIcon from "../assets/filter.png";
     const { header } = $props();
 
@@ -15,7 +15,7 @@
                     <img src={filterIcon} aria-label="filter-icon" height={15} width={15} alt="filter-icon"/>
                 </button>
                 {#if showFilterPopover}
-                    <div popover id={`filter-popover-${header.name}`} class="absolute bg-red-100 p-3 rounded-sm overflow-x-auto filter-popover" transition:fade={{ duration: 200 }}>
+                    <div popover id={`filter-popover-${header.name}`} class="absolute shadow-md mt-2 p-3 rounded-sm overflow-x-auto filter-popover" transition:fade={{ duration: 200 }}>
                         {@render header.columnFilter()}
                     </div>
                 {/if}
