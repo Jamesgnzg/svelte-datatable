@@ -6,7 +6,7 @@
     <label for="name" class="text-base rtl:text-right font-bold block text-gray-700 dark:text-gray-200 space-y-2 mb-1">
         Company
     </label>
-    <p class="mb-2 font-light text-sm">
+    <p class="mb-2 font-light">
         Show companies whose names include the specified text
     </p>
     <div class="flex w-full gap-1 border border-gray-300 px-2 py-2 focus-within:border-orange-500 rounded-lg">
