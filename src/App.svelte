@@ -28,6 +28,6 @@
 
 <main>
     <div class="p-5">
-      <DataTable companies={[]} columns={columnsConfig} noRecordsMessage={"No records to show"}/>
+      <DataTable companies={[]} columns={columnsConfig} />
     </div>
 </main>
