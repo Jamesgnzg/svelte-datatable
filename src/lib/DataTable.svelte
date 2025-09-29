@@ -3,8 +3,9 @@
   import type { ColumnDataMapping } from "../interface/columnMapping";
   import type { company } from "../interface/companies";
   import DataTableHeader from "./DataTableHeader.svelte";
+  import NoDataIcon from "../assets/no-data.png";
 
-    const { companies, columns }: {companies: company[], columns:Column[]} = $props();
+    const { companies, columns, noRecordsMessage }: {companies: company[], columns:Column[], noRecordsMessage: string} = $props();
     const columnDataMapping:ColumnDataMapping<Column> = {};
     let columnHeaders: any[] = [];
     let tableData: any[] = [];
@@ -76,4 +77,13 @@
             {/each}
         </tbody>
     </table>
+
+    {#if tableData.length === 0}
+        <div class="flex justify-center items-center min-h-12">
+            <div class="p-5">
+                <img class="items-center m-auto" src={NoDataIcon} height={40} width={40} alt="No Data" />
+                <p class="text-gray-400">{noRecordsMessage}</p>
+            </div>
+        </div>
+    {/if}
 </div>

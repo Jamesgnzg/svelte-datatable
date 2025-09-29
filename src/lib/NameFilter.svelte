@@ -1,5 +1,5 @@
 <script lang="ts">
-    import searchIcon from "../assets/search.png";
+    import searchIcon from "../assets/search-icon.png";
 </script>
 
 <div class="normal-case">
