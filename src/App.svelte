@@ -4,11 +4,32 @@
   import DataTable from "./lib/DataTable.svelte";
   import Filter from "./lib/Filter.svelte";
   import NameFilter from "./lib/NameFilter.svelte";
+  
+  let nameQuery = $state('');
 
-  const columnsConfig = [
+  const initialRecords:company[] = companies;
+  const records:company[] | [] = $derived.by(() => {
+    return initialRecords.filter(({name}) => {
+      if (!name.toLowerCase().includes(nameQuery.trim().toLowerCase()) && nameQuery !== '') {
+        return false;
+      }
+
+      return true;
+    })
+  })
+
+</script>
+
+<main>
+  {#snippet nameFilterSnippet()}
+    <NameFilter bind:query={nameQuery} />
+  {/snippet}
+  
+    <div class="p-5">
+      <DataTable companies={records} columns={[
         {
             accessor: 'name',
-            filter: NameFilter,
+            filter: nameFilterSnippet,
         },
         {
           accessor: 'streetAddress',
@@ -22,12 +43,6 @@
           accessor: 'missionStatement',
           filter: Filter,
         }
-      ]
-    const initialRecords:company[] = companies;
-</script>
-
-<main>
-    <div class="p-5">
-      <DataTable companies={[]} columns={columnsConfig} />
+      ]} />
     </div>
 </main>

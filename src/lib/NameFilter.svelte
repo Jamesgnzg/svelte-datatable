@@ -1,6 +1,8 @@
 <script lang="ts">
     import searchIcon from "../assets/search-icon.png";
     import closeIcon from "../assets/cross.png";
+
+    let { query=$bindable('') } = $props();
 </script>
 
 <div class="normal-case">
@@ -12,7 +14,7 @@
     </p>
     <div class="flex w-full gap-1 border border-gray-300 px-2 py-2 focus-within:border-orange-500 rounded-lg">
         <img src={searchIcon} class="bg-transparent" aria-label="search-icon" height={5} width={20} alt="search-icon"/>
-        <input name="name" class="text-sm text-gray-500 font-normal w-full focus:outline-none" placeholder="Search company..."/>
+        <input name="name" class="text-sm text-gray-500 font-normal w-full focus:outline-none" placeholder="Search company..." bind:value={query} />
         <img src={closeIcon} class="bg-transparent cursor-pointer hover:bg-gray-100 p-1 rounded" aria-label="close-icon" height={5} width={20} alt="close-icon" title="Clear Filter"/>
     </div>
 </div>
