@@ -4,10 +4,22 @@
   import type { company } from "../interface/companies";
   import DataTableHeader from "./DataTableHeader.svelte";
   import NoDataIcon from "../assets/no-data.png";
+  import type { ColumnHeader } from "../interface/columnHeader";
 
     const { companies = $bindable([]), columns, noRecordsMessage = "No records"}: {companies: company[], columns:Column[], noRecordsMessage?: string} = $props();
     const columnDataMapping:ColumnDataMapping<Column> = {};
-    let columnHeaders: { name: string, columnFilter?: Function }[] = [];
+    let columnHeaders: ColumnHeader[] = $derived.by(() => {
+        const col: ColumnHeader[]  = [];
+        columns.forEach((column) => {
+            col.push({
+                name: separateWordsByCase(column.accessor),
+                columnFilter: column?.filter,
+                isFiltered: column.filtering || false
+            })
+        })
+
+        return col;
+    });
     let dataKeys:  string[] = $derived(Object.keys(columnDataMapping));
     let tableData: any[] = $derived.by(() => {
         const data: any[] = []; 
@@ -31,15 +43,6 @@
         return str.replace(/([a-z])([A-Z])/g, '$1 $2');
     }
 
-    const createColumnHeaders = (): void => {
-        columns.forEach((column) => {
-            columnHeaders.push({
-                name: separateWordsByCase(column.accessor),
-                columnFilter: column?.filter
-            })
-        })
-    }
-
     const createColumnDataMapping = () => {
         columns.forEach((column) => {
             columnDataMapping[column.accessor] = {
@@ -51,7 +54,6 @@
     }
 
     $effect.pre(() => {
-        createColumnHeaders();
         createColumnDataMapping();
     })
 </script>

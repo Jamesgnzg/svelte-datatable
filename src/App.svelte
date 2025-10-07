@@ -7,6 +7,7 @@
   import closeIcon from "../src/assets/cross.png";
 
   const initialRecords:company[] = companies;
+  // let columnsConfig = $state([]);
   let nameQuery = $state.raw('');
   let records:company[] | [] = $derived.by(() => {
     return initialRecords.filter(({name}) => {
@@ -17,7 +18,7 @@
       return true;
     })
   })
-  
+
 </script>
 
 <main>
@@ -31,7 +32,7 @@
       </p>
       <div class="flex w-full gap-1 border border-gray-300 px-2 py-2 focus-within:border-orange-500 rounded-lg">
           <img src={searchIcon} class="bg-transparent" aria-label="search-icon" height={5} width={20} alt="search-icon"/>
-          <input name="name" class="text-sm text-gray-500 font-normal w-full focus:outline-none" placeholder="Search company..." bind:value={nameQuery}/>
+          <input name="name" class="text-sm text-gray-500 font-normal w-full focus:outline-none" placeholder="Search company..." bind:value={nameQuery} />
           <button class="ring-0 cursor-pointer hover:bg-gray-100 rounded p-1" onclick={() => nameQuery = ''}>
               <img src={closeIcon} class="bg-transparent" aria-label="close-icon" height={5} width={20} alt="close-icon" title="Clear Filter" />
           </button>
@@ -42,8 +43,9 @@
   <div class="p-5">
     <DataTable bind:companies={records} columns={[
       {
-          accessor: 'name',
-          filter: nameFilterSnippet,
+        accessor: 'name',
+        filter: nameFilterSnippet,
+        filtering:  nameQuery !== ''
       },
       {
         accessor: 'streetAddress',

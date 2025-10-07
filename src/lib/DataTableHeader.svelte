@@ -1,7 +1,10 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
     import filterIcon from "../assets/filter.png";
-    const { header } = $props();
+    import filterIconActive from "../assets/filter-active.png";
+  import type { ColumnHeader } from "../interface/columnHeader";
+
+    const { header = $bindable() }: { header: ColumnHeader} = $props();
 
     let showFilterPopover = $state(false);
 </script>
@@ -12,7 +15,11 @@
         {#if header.columnFilter}
             <div class="flex flex-col items-center">
                 <button class="p-1 -mt-1 -mr-5 cursor-pointer rounded-sm hover:bg-gray-200" popovertarget={`filter-popover-${header.name}`} popovertargetaction="toggle" onclick={() => showFilterPopover = !showFilterPopover}>
-                    <img src={filterIcon} aria-label="filter-icon" height={15} width={15} alt="filter-icon"/>
+                    {#if header.isFiltered}
+                        <img src={filterIconActive} aria-label="filter-icon" height={15} width={15} alt="filter-icon"/>
+                    {:else}
+                        <img src={filterIcon} aria-label="filter-icon" height={15} width={15} alt="filter-icon"/>
+                    {/if}
                 </button>
                 {#if showFilterPopover}
                     <div popover id={`filter-popover-${header.name}`} class="absolute shadow-md mt-2 p-3 rounded-sm overflow-x-auto filter-popover" transition:fade={{ duration: 200 }}>
