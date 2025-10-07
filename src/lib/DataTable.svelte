@@ -5,10 +5,27 @@
   import DataTableHeader from "./DataTableHeader.svelte";
   import NoDataIcon from "../assets/no-data.png";
 
-    const { companies, columns, noRecordsMessage = "No records"}: {companies: company[], columns:Column[], noRecordsMessage?: string} = $props();
+    const { companies = $bindable([]), columns, noRecordsMessage = "No records"}: {companies: company[], columns:Column[], noRecordsMessage?: string} = $props();
     const columnDataMapping:ColumnDataMapping<Column> = {};
     let columnHeaders: any[] = [];
-    let tableData: any[] = [];
+    let tableData: any[] = $derived.by(() => {
+        const data: any[] = []; 
+        companies.forEach((company: { [x: string]: any; }) => {
+            let formattedData: any = {};
+            dataKeys.forEach((key) =>{
+                if(columnDataMapping[key].render) {
+                    formattedData[key] = columnDataMapping[key].render.apply(company, [company]);
+                } else {
+                    formattedData[key] = company[key];
+                }
+            })
+
+            data.push(formattedData);
+        })
+
+        return data;
+    });
+    
     let dataKeys:  any[] = $derived(Object.keys(columnDataMapping));
 
     const separateWordsByCase = (str: string): string => {
@@ -34,25 +51,9 @@
         })
     }
 
-    const mapKeysToData = () => {
-        companies.forEach((company: { [x: string]: any; }) => {
-            let formattedData: any = {};
-            dataKeys.forEach((key) =>{
-                if(columnDataMapping[key].render) {
-                    formattedData[key] = columnDataMapping[key].render.apply(company, [company]);
-                } else {
-                    formattedData[key] = company[key];
-                }
-            })
-
-            tableData.push(formattedData);
-        })
-    }
-
     $effect.pre(() => {
         createColumnHeaders();
         createColumnDataMapping();
-        mapKeysToData();
     })
 </script>
 
