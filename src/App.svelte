@@ -6,10 +6,8 @@
   import searchIcon from "../src/assets/search-icon.png";
   import closeIcon from "../src/assets/cross.png";
 
-  
-  let nameQuery = $state.raw('');
   const initialRecords:company[] = companies;
-
+  let nameQuery = $state.raw('');
   let records:company[] | [] = $derived.by(() => {
     return initialRecords.filter(({name}) => {
       if (!name.toLowerCase().includes(nameQuery.trim().toLowerCase()) && nameQuery !== '') {
@@ -19,7 +17,7 @@
       return true;
     })
   })
-
+  
 </script>
 
 <main>
@@ -41,24 +39,24 @@
     </div>
   {/snippet}
 
-    <div class="p-5">
-      <DataTable bind:companies={records} columns={[
-        {
-            accessor: 'name',
-            filter: nameFilterSnippet,
-        },
-        {
-          accessor: 'streetAddress',
-          render: ({ streetAddress, city }: {streetAddress: string, city: string}):string => `${streetAddress}, ${city}`
-        },
-        {
-          accessor: 'state',
-          filter: Filter,
-        },
-        {
-          accessor: 'missionStatement',
-          filter: Filter,
-        }
-      ]} />
-    </div>
+  <div class="p-5">
+    <DataTable bind:companies={records} columns={[
+      {
+          accessor: 'name',
+          filter: nameFilterSnippet,
+      },
+      {
+        accessor: 'streetAddress',
+        render: ({ streetAddress, city }: {streetAddress: string, city: string}):string => `${streetAddress}, ${city}`
+      },
+      {
+        accessor: 'state',
+        filter: Filter,
+      },
+      {
+        accessor: 'missionStatement',
+        filter: Filter,
+      }
+    ]} />
+  </div>
 </main>

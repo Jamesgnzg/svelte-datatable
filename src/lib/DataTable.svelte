@@ -7,7 +7,8 @@
 
     const { companies = $bindable([]), columns, noRecordsMessage = "No records"}: {companies: company[], columns:Column[], noRecordsMessage?: string} = $props();
     const columnDataMapping:ColumnDataMapping<Column> = {};
-    let columnHeaders: any[] = [];
+    let columnHeaders: { name: string, columnFilter?: Function }[] = [];
+    let dataKeys:  string[] = $derived(Object.keys(columnDataMapping));
     let tableData: any[] = $derived.by(() => {
         const data: any[] = []; 
         companies.forEach((company: { [x: string]: any; }) => {
@@ -25,14 +26,12 @@
 
         return data;
     });
-    
-    let dataKeys:  any[] = $derived(Object.keys(columnDataMapping));
 
     const separateWordsByCase = (str: string): string => {
         return str.replace(/([a-z])([A-Z])/g, '$1 $2');
     }
 
-    const createColumnHeaders = () => {
+    const createColumnHeaders = (): void => {
         columns.forEach((column) => {
             columnHeaders.push({
                 name: separateWordsByCase(column.accessor),
