@@ -7,8 +7,19 @@
   import NoDataIcon from "../assets/no-data.png";
 
     const { companies = $bindable([]), columns, noRecordsMessage = "No records", stickyHeader = false}: DataTableProps = $props();
-    const columnDataMapping:ColumnDataMapping<Column> = {};
     const stickyHeaderClass: string = stickyHeader ? 'sticky top-0' : '';
+    let columnDataMapping:ColumnDataMapping<Column> = $derived.by(() => {
+        const dataMapping: ColumnDataMapping<Column> = {};
+        columns.forEach((column) => {
+            dataMapping[column.accessor] = {
+                accessor: column.accessor,
+                filter: column?.filter,
+                render: column?.render
+            } 
+        })
+
+        return dataMapping;
+    });
     let columnHeaders: ColumnHeader[] = $derived.by(() => {
         const col: ColumnHeader[]  = [];
         columns.forEach((column) => {
@@ -43,20 +54,6 @@
     const separateWordsByCase = (str: string): string => {
         return str.replace(/([a-z])([A-Z])/g, '$1 $2');
     }
-
-    const createColumnDataMapping = () => {
-        columns.forEach((column) => {
-            columnDataMapping[column.accessor] = {
-                accessor: column.accessor,
-                filter: column?.filter,
-                render: column?.render
-            } 
-        })
-    }
-
-    $effect.pre(() => {
-        createColumnDataMapping();
-    })
 </script>
 
 <div class="relative shadow-md sm:rounded-lg">
