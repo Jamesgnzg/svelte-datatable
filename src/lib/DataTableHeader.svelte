@@ -32,7 +32,7 @@
                     {/if}
                 </button>
                 {#if showFilterPopover}
-                    <div popover="manual" id={`filter-popover-${header.name}`} class="absolute shadow-md mt-2 p-3 rounded-sm overflow-x-auto filter-popover" in:slide={{ duration: 500 }} out:slide >
+                    <div popover="manual" id={`filter-popover-${header.name}`} class="absolute shadow-md mt-2 p-3 rounded-sm overflow-x-auto filter-popover min-h-10" in:slide={{ duration: 330, delay: 200 }} out:slide >
                         {@render header.columnFilter()}
                     </div>
                 {/if}
