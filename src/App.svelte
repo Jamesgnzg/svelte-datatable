@@ -7,14 +7,12 @@
   import closeIcon from "../src/assets/cross.png";
 
   const initialRecords:company[] = companies;
-  // let columnsConfig = $state([]);
   let nameQuery = $state.raw('');
   let records:company[] | [] = $derived.by(() => {
     return initialRecords.filter(({name}) => {
       if (!name.toLowerCase().includes(nameQuery.trim().toLowerCase()) && nameQuery !== '') {
         return false;
       }
-
       return true;
     })
   })
@@ -41,24 +39,28 @@
   {/snippet}
 
   <div class="p-5">
-    <DataTable bind:companies={records} columns={[
-      {
-        accessor: 'name',
-        filter: nameFilterSnippet,
-        filtering:  nameQuery !== ''
-      },
-      {
-        accessor: 'streetAddress',
-        render: ({ streetAddress, city }: {streetAddress: string, city: string}):string => `${streetAddress}, ${city}`
-      },
-      {
-        accessor: 'state',
-        filter: Filter,
-      },
-      {
-        accessor: 'missionStatement',
-        filter: Filter,
-      }
-    ]} />
+    <DataTable 
+      bind:companies={records}
+      columns={[
+        {
+          accessor: 'name',
+          filter: nameFilterSnippet,
+          filtering:  nameQuery !== ''
+        },
+        {
+          accessor: 'streetAddress',
+          render: ({ streetAddress, city }: {streetAddress: string, city: string}):string => `${streetAddress}, ${city}`
+        },
+        {
+          accessor: 'state',
+          filter: Filter,
+        },
+        {
+          accessor: 'missionStatement',
+          filter: Filter,
+        }
+      ]}
+      stickyHeader = {true}
+    />
   </div>
 </main>

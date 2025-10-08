@@ -1,13 +1,14 @@
 <script lang="ts">
   import type { Column } from "../interface/column";
   import type { ColumnDataMapping } from "../interface/columnMapping";
-  import type { company } from "../interface/companies";
+  import type { DataTableProps } from "../interface/DataTableProps";
+  import type { ColumnHeader } from "../interface/columnHeader";
   import DataTableHeader from "./DataTableHeader.svelte";
   import NoDataIcon from "../assets/no-data.png";
-  import type { ColumnHeader } from "../interface/columnHeader";
 
-    const { companies = $bindable([]), columns, noRecordsMessage = "No records"}: {companies: company[], columns:Column[], noRecordsMessage?: string} = $props();
+    const { companies = $bindable([]), columns, noRecordsMessage = "No records", stickyHeader = false}: DataTableProps = $props();
     const columnDataMapping:ColumnDataMapping<Column> = {};
+    const stickyHeaderClass: string = stickyHeader ? 'sticky top-0' : '';
     let columnHeaders: ColumnHeader[] = $derived.by(() => {
         const col: ColumnHeader[]  = [];
         columns.forEach((column) => {
@@ -60,7 +61,7 @@
 
 <div class="relative shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 {stickyHeaderClass}">
             <tr>
                 {#each columnHeaders as header}
                     <DataTableHeader header={header} />
