@@ -12,7 +12,7 @@
         if (showFilterPopover == true) {
             setTimeout(() => {
                 showFilterPopover = false;
-            }, 400)
+            }, 200)
         } else {
             showFilterPopover = true;
         }
