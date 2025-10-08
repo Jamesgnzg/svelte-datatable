@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { Column } from "../interface/column";
-  import type { ColumnDataMapping } from "../interface/columnMapping";
-  import type { DataTableProps } from "../interface/DataTableProps";
-  import type { ColumnHeader } from "../interface/columnHeader";
-  import DataTableHeader from "./DataTableHeader.svelte";
-  import NoDataIcon from "../assets/no-data.png";
+    import type { Column } from "../interface/column";
+    import type { ColumnDataMapping } from "../interface/columnMapping";
+    import type { DataTableProps } from "../interface/DataTableProps";
+    import type { ColumnHeader } from "../interface/columnHeader";
+    import DataTableHeader from "./DataTableHeader.svelte";
+    import NoDataIcon from "../assets/no-data.png";
 
     const { companies = $bindable([]), columns, noRecordsMessage = "No records", stickyHeader = false}: DataTableProps = $props();
     const stickyHeaderClass: string = stickyHeader ? 'sticky top-0' : '';

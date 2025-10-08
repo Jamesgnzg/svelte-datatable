@@ -1,12 +1,22 @@
 <script lang="ts">
-    import { fade } from "svelte/transition";
+    import { slide } from "svelte/transition";
     import filterIcon from "../assets/filter.png";
     import filterIconActive from "../assets/filter-active.png";
-  import type { ColumnHeader } from "../interface/columnHeader";
+    import type { ColumnHeader } from "../interface/columnHeader";
 
     const { header = $bindable() }: { header: ColumnHeader} = $props();
 
     let showFilterPopover = $state(false);
+
+    const togglePopover = () => {
+        if (showFilterPopover == true) {
+            setTimeout(() => {
+                showFilterPopover = false;
+            }, 400)
+        } else {
+            showFilterPopover = true;
+        }
+    }
 </script>
 
 <th scope="col" class="px-6 py-3">
@@ -14,7 +24,7 @@
         { header.name }
         {#if header.columnFilter}
             <div class="flex flex-col items-center">
-                <button class="p-1 -mt-1 -mr-5 cursor-pointer rounded-sm hover:bg-gray-200" popovertarget={`filter-popover-${header.name}`} popovertargetaction="toggle" onclick={() => showFilterPopover = !showFilterPopover}>
+                <button class="p-1 -mt-1 -mr-5 cursor-pointer rounded-sm hover:bg-gray-200" id={`filter-popover-toggle-${header.name}`} popovertarget={`filter-popover-${header.name}`} popovertargetaction="show" onclick={() => togglePopover() } >
                     {#if header.isFiltered}
                         <img src={filterIconActive} aria-label="filter-icon" height={15} width={15} alt="filter-icon"/>
                     {:else}
@@ -22,7 +32,7 @@
                     {/if}
                 </button>
                 {#if showFilterPopover}
-                    <div popover id={`filter-popover-${header.name}`} class="absolute shadow-md mt-2 p-3 rounded-sm overflow-x-auto filter-popover" transition:fade={{ duration: 200 }}>
+                    <div popover="manual" id={`filter-popover-${header.name}`} class="absolute shadow-md mt-2 p-3 rounded-sm overflow-x-auto filter-popover" in:slide={{ duration: 500 }} out:slide >
                         {@render header.columnFilter()}
                     </div>
                 {/if}
