@@ -9,7 +9,6 @@
 
     const { companies = $bindable([]), columns, noRecordsMessage = "No records", stickyHeader = false, fetching = $bindable(false)}: DataTableProps = $props();
     const stickyHeaderClass: string = stickyHeader ? 'sticky top-0' : '';
-    const fetchingHeaderClass: string = fetching ? '-z-10' : '';
     let columnDataMapping:ColumnDataMapping<Column> = $derived.by(() => {
         const dataMapping: ColumnDataMapping<Column> = {};
         columns.forEach((column) => {
@@ -60,13 +59,13 @@
 
 <div class="relative shadow-md sm:rounded-lg">
     {#if fetching}
-        <div role="status" class="absolute flex h-full w-full items-center justify-center bg-white opacity-55">
+        <div role="status" class="absolute flex h-full w-full items-center justify-center bg-white opacity-55 z-10">
             <img src={Spinner} class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600" alt="Loading.."  />
             <span class="sr-only">Loading...</span>
         </div>
     {/if}
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 {stickyHeaderClass} {fetchingHeaderClass}">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 {stickyHeaderClass} z-2">
             <tr>
                 {#each columnHeaders as header}
                     <DataTableHeader header={header} />
