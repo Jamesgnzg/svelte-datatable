@@ -61,7 +61,6 @@
         }
       ]}
       stickyHeader = {true}
-      fetching = {true}
     />
   </div>
 </main>
