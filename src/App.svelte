@@ -61,6 +61,7 @@
         }
       ]}
       stickyHeader = {true}
+      recordsPerPage = {13}
     />
   </div>
 </main>

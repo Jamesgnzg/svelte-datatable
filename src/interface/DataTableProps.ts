@@ -7,4 +7,5 @@ export interface DataTableProps {
   noRecordsMessage?: string;
   stickyHeader?: boolean;
   fetching?: boolean;
+  recordsPerPage?: number;
 }
