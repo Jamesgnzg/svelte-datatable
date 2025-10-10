@@ -87,7 +87,7 @@
         {#if recordsPerPage}
             <tfoot>
                 <tr>
-                    <td colspan="4">
+                    <td colspan={columns.length}>
                         <div class="flex p-4 font-bold w-full justify-between">
                             <span class="pt-2">{recordsPerPage} / {companies?.length}</span>
                             <nav class="flex items-center -space-x-px" aria-label="Pagination">
