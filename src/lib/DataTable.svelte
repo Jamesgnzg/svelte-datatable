@@ -85,7 +85,7 @@
                 </tr>
             {/each}
         </tbody>
-        {#if recordsPerPage}
+        {#if recordsPerPage.length > 0}
             <tfoot>
                 <tr>
                     <td colspan={columns.length}>

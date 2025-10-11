@@ -62,7 +62,6 @@
         }
       ]}
       stickyHeader = {true}
-      recordsPerPage = {PAGE_SIZE}
     />
   </div>
 </main>
