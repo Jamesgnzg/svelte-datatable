@@ -7,6 +7,7 @@
   import closeIcon from "../src/assets/cross.png";
 
   const initialRecords:company[] = companies;
+  const PAGE_SIZE = [10, 15, 20];
   let nameQuery = $state.raw('');
   let records:company[] | [] = $derived.by(() => {
     return initialRecords.filter(({name}) => {
@@ -61,7 +62,7 @@
         }
       ]}
       stickyHeader = {true}
-      recordsPerPage = {13}
+      recordsPerPage = {PAGE_SIZE}
     />
   </div>
 </main>
