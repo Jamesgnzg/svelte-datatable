@@ -2,20 +2,26 @@
   import { companies } from "./data/Companies";
   import type { company } from "./interface/companies";
   import DataTable from "./lib/DataTable.svelte";
-  import Filter from "./lib/Filter.svelte";
   import searchIcon from "../src/assets/search-icon.png";
   import closeIcon from "../src/assets/cross.png";
 
   const initialRecords:company[] = companies;
-  const PAGE_SIZE = [10, 15, 20];
+  const PAGE_SIZES = [10, 15, 20];
   let nameQuery = $state.raw('');
+  let page = $state(1);
+  let pageSize = $state(PAGE_SIZES[0]);
   let records:company[] | [] = $derived.by(() => {
-    return initialRecords.filter(({name}) => {
+    const filteredRecords = initialRecords.filter(({name}) => {
       if (!name.toLowerCase().includes(nameQuery.trim().toLowerCase()) && nameQuery !== '') {
         return false;
       }
       return true;
     })
+
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize;
+    
+    return filteredRecords.slice(from, to);
   })
 
 </script>
@@ -45,8 +51,8 @@
       columns={[
         {
           accessor: 'name',
-          filter: nameFilterSnippet,
-          filtering:  nameQuery !== ''
+          /* filter: nameFilterSnippet,
+          filtering:  nameQuery !== '' */
         },
         {
           accessor: 'streetAddress',
@@ -54,14 +60,17 @@
         },
         {
           accessor: 'state',
-          filter: Filter,
         },
         {
           accessor: 'missionStatement',
-          filter: Filter,
         }
       ]}
       stickyHeader = {true}
+      totalRecords = {initialRecords.length}
+      page = {page}
+      onPageChange = {(selectedPage: number) => page = selectedPage}
+      recordsPerPage = {pageSize}
+      recordsPerPageSelection = {PAGE_SIZES}
     />
   </div>
 </main>

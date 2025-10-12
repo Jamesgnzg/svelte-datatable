@@ -7,5 +7,9 @@ export interface DataTableProps {
   noRecordsMessage?: string;
   stickyHeader?: boolean;
   fetching?: boolean;
-  recordsPerPage?: number[];
+  totalRecords?: number;
+  page?: number;
+  onPageChange?: Function;
+  recordsPerPage?: number;
+  recordsPerPageSelection?: number[];
 }
