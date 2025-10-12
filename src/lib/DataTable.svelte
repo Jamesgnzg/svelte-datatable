@@ -9,7 +9,7 @@
 
     const { companies = $bindable([]), columns, noRecordsMessage = "No records", 
             stickyHeader = false, fetching = $bindable(false), totalRecords = 0, page = $bindable(0),  onPageChange, 
-            recordsPerPage = $bindable(0), recordsPerPageSelection = $bindable([]), updateRecordsPerPage}: DataTableProps = $props();
+            recordsPerPage = $bindable(0), recordsPerPageSelection = $bindable([]), updateRecordsPerPage, paginationActiveBackgroundColor="bg-orange-200"}: DataTableProps = $props();
     const stickyHeaderClass: string = stickyHeader ? 'sticky top-0' : '';
     const totalPages = $derived(Math.ceil(totalRecords / recordsPerPage));
     let columnDataMapping:ColumnDataMapping<Column> = $derived.by(() => {
@@ -109,7 +109,7 @@
                                         <span class="hidden sm:block">Previous</span>
                                     </button>
                                     {#each { length:totalPages } , index }
-                                        <button type="button" class="min-h-9.5 min-w-9.5 flex justify-center items-center text-gray-800 border border-gray-200 py-2 px-3 text-sm first:rounded-s-lg last:rounded-e-lg focus:outline-hidden focus:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-600 dark:border-neutral-700 dark:text-white dark:focus:bg-neutral-500" aria-current="page" onclick={() => onPageChange(index + 1)}>{index + 1}</button>
+                                        <button type="button" class="min-h-9.5 min-w-9.5 flex justify-center items-center text-gray-800 border border-gray-200 py-2 px-3 text-sm first:rounded-s-lg last:rounded-e-lg focus:outline-hidden focus:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-600 dark:border-neutral-700 dark:text-white dark:focus:bg-neutral-500 { page == index + 1 ? paginationActiveBackgroundColor : '' }" aria-current="page" onclick={() => onPageChange(index + 1)}>{index + 1}</button>
                                     {/each}
                                     <button type="button" class="min-h-9.5 min-w-9.5 py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10" aria-label="Next"
                                         onclick={() => { if(page < totalPages ) onPageChange(page + 1)} } disabled= {page == totalPages}>

@@ -75,6 +75,7 @@
         page = 1;
         pageSize = newPageSize;
       } }
+      paginationActiveBackgroundColor = "bg-gray-200"
     />
   </div>
 </main>

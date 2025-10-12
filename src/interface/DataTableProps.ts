@@ -13,4 +13,5 @@ export interface DataTableProps {
   recordsPerPage?: number;
   recordsPerPageSelection?: number[];
   updateRecordsPerPage?: Function;
+  paginationActiveBackgroundColor?: string;
 }
