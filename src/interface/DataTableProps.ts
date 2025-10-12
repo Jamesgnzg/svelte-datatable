@@ -12,4 +12,5 @@ export interface DataTableProps {
   onPageChange?: Function;
   recordsPerPage?: number;
   recordsPerPageSelection?: number[];
+  updateRecordsPerPage?: Function;
 }

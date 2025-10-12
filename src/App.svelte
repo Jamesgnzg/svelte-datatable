@@ -8,8 +8,8 @@
   const initialRecords:company[] = companies;
   const PAGE_SIZES = [10, 15, 20];
   let nameQuery = $state.raw('');
-  let page = $state(1);
   let pageSize = $state(PAGE_SIZES[0]);
+  let page = $state(1);
   let records:company[] | [] = $derived.by(() => {
     const filteredRecords = initialRecords.filter(({name}) => {
       if (!name.toLowerCase().includes(nameQuery.trim().toLowerCase()) && nameQuery !== '') {
@@ -71,6 +71,7 @@
       onPageChange = {(selectedPage: number) => page = selectedPage}
       recordsPerPage = {pageSize}
       recordsPerPageSelection = {PAGE_SIZES}
+      updateRecordsPerPage = {(newPageSize: number) => pageSize = newPageSize }
     />
   </div>
 </main>

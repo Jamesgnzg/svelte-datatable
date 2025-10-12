@@ -9,7 +9,7 @@
 
     const { companies = $bindable([]), columns, noRecordsMessage = "No records", 
             stickyHeader = false, fetching = $bindable(false), totalRecords = 0, page = $bindable(0),  onPageChange, 
-            recordsPerPage = $bindable(0), recordsPerPageSelection = $bindable([])}: DataTableProps = $props();
+            recordsPerPage = $bindable(0), recordsPerPageSelection = $bindable([]), updateRecordsPerPage}: DataTableProps = $props();
     const stickyHeaderClass: string = stickyHeader ? 'sticky top-0' : '';
     let columnDataMapping:ColumnDataMapping<Column> = $derived.by(() => {
         const dataMapping: ColumnDataMapping<Column> = {};
@@ -53,7 +53,7 @@
 
         return data;
     });
-    let shownRecordsPerPage = $state(recordsPerPageSelection[0]);
+    let shownRecordsPerPage = $state(recordsPerPage);
 
     const separateWordsByCase = (str: string): string => {
         return str.replace(/([a-z])([A-Z])/g, '$1 $2');
@@ -86,7 +86,7 @@
                 </tr>
             {/each}
         </tbody>
-        {#if recordsPerPage > 0 && onPageChange}
+        {#if recordsPerPage > 0 && onPageChange && updateRecordsPerPage}
             <tfoot>
                 <tr>
                     <td colspan={columns.length}>
@@ -94,7 +94,7 @@
                             <span class="pt-3">{shownRecordsPerPage} / {totalRecords}</span>
                             <div class="flex gap-10 flex-col justify-center items-center md:justify-between md:min-w-sm md:flex-row">
                                 <label for="numberOfRecs" class="text-sm font-medium text-gray-900 dark:text-white w-full">Records per page</label>
-                                <select id="numberOfRecs" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" bind:value={shownRecordsPerPage}>
+                                <select id="numberOfRecs" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" bind:value={shownRecordsPerPage} onchange={() => updateRecordsPerPage(shownRecordsPerPage)}>
                                     {#each recordsPerPageSelection as numberOfRecords}
                                         <option value={numberOfRecords}>{numberOfRecords}</option>
                                     {/each}
