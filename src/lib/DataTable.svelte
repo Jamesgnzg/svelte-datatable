@@ -11,7 +11,7 @@
             stickyHeader = false, fetching = $bindable(false), totalRecords = 0, page = $bindable(0),  onPageChange, 
             recordsPerPage = $bindable(0), recordsPerPageSelection = $bindable([]), updateRecordsPerPage}: DataTableProps = $props();
     const stickyHeaderClass: string = stickyHeader ? 'sticky top-0' : '';
-    const totalPages = Math.ceil(totalRecords / recordsPerPage);
+    const totalPages = $derived(Math.ceil(totalRecords / recordsPerPage));
     let columnDataMapping:ColumnDataMapping<Column> = $derived.by(() => {
         const dataMapping: ColumnDataMapping<Column> = {};
         columns.forEach((column) => {
