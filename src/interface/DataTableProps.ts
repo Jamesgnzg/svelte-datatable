@@ -10,7 +10,7 @@ export interface DataTableProps {
   totalRecords?: number;
   page?: number;
   onPageChange?: Function;
-  recordsPerPage?: number;
+  displayedRecordsPerPage?: number;
   recordsPerPageSelection?: number[];
   updateRecordsPerPage?: Function;
   paginationActiveBackgroundColor?: string;

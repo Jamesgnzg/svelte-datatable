@@ -6,7 +6,7 @@
   import closeIcon from "../src/assets/cross.png";
 
   const initialRecords:company[] = companies;
-  const PAGE_SIZES = [10, 15, 20];
+  const PAGE_SIZES = [5, 10, 15];
   let nameQuery = $state.raw('');
   let pageSize = $state(PAGE_SIZES[0]);
   let page = $state(1);
@@ -69,7 +69,7 @@
       totalRecords = {initialRecords.length}
       page = {page}
       onPageChange = {(selectedPage: number) => page = selectedPage}
-      recordsPerPage = {pageSize}
+      displayedRecordsPerPage = {pageSize}
       recordsPerPageSelection = {PAGE_SIZES}
       updateRecordsPerPage = {(newPageSize: number) => {
         page = 1;
