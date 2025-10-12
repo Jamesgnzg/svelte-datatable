@@ -8,7 +8,7 @@
   const initialRecords:company[] = companies;
   const PAGE_SIZES = [10, 15, 20];
   let nameQuery = $state.raw('');
-  let pageSize = $state(PAGE_SIZES[0]);
+  let pageSize = $state(PAGE_SIZES[1]);
   let page = $state(1);
   let records:company[] | [] = $derived.by(() => {
     const filteredRecords = initialRecords.filter(({name}) => {
