@@ -6,6 +6,7 @@
     import DataTableHeader from "./DataTableHeader.svelte";
     import NoDataIcon from "../assets/no-data.png";
     import Spinner from "../assets/loading.png";
+  import type { TableData } from "../interface/tableData";
 
     const { companies = $bindable([]), columns, noRecordsMessage = "No records", 
             stickyHeader = false, fetching = $bindable(false), totalRecords = 0, page = $bindable(0),  onPageChange, 
@@ -36,12 +37,12 @@
 
         return col;
     });
-    let dataKeys:  string[] = $derived(Object.keys(columnDataMapping));
-    let tableData: any[] = $derived.by(() => {
-        const data: any[] = []; 
+    let columnKeys:  string[] = $derived(Object.keys(columnDataMapping));
+    let tableData: TableData[] = $derived.by(() => {
+        const data: TableData[] = []; 
         companies.forEach((company: { [x: string]: any; }) => {
-            let formattedData: any = {};
-            dataKeys.forEach((key) =>{
+            let formattedData: TableData = {};
+            columnKeys.forEach((key) =>{
                 if(columnDataMapping[key].render) {
                     formattedData[key] = columnDataMapping[key].render.apply(company, [company]);
                 } else {
@@ -79,7 +80,7 @@
         <tbody>
             {#each tableData as data}
                 <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                    {#each dataKeys as key}
+                    {#each columnKeys as key}
                         <td class="px-6 py-4">
                             { data[key] }
                         </td>
