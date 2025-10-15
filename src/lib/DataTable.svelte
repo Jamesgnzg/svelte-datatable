@@ -3,10 +3,11 @@
     import type { ColumnDataMapping } from "../interface/columnMapping";
     import type { DataTableProps } from "../interface/DataTableProps";
     import type { ColumnHeader } from "../interface/columnHeader";
+    import type { TableData } from "../interface/tableData";
     import DataTableHeader from "./DataTableHeader.svelte";
+    import DataTableBody from "./DataTableBody.svelte";
     import NoDataIcon from "../assets/no-data.png";
     import Spinner from "../assets/loading.png";
-  import type { TableData } from "../interface/tableData";
 
     const { companies = $bindable([]), columns, noRecordsMessage = "No records", 
             stickyHeader = false, fetching = $bindable(false), totalRecords = 0, page = $bindable(0),  onPageChange, 
@@ -27,8 +28,9 @@
     });
     let columnHeaders: ColumnHeader[] = $derived.by(() => {
         const col: ColumnHeader[]  = [];
-        columns.forEach((column) => {
+        columns.forEach((column, i) => {
             col.push({
+                index: i,
                 name: separateWordsByCase(column.accessor),
                 columnFilter: column?.filter,
                 isFiltered: column.filtering || false
@@ -77,18 +79,8 @@
                 {/each}
             </tr>
         </thead>
-        <tbody>
-            {#each tableData as data}
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                    {#each columnKeys as key}
-                        <td class="px-6 py-4">
-                            { data[key] }
-                        </td>
-                    {/each}
-                </tr>
-            {/each}
-        </tbody>
-        {#if displayedRecordsPerPage > 0 && onPageChange && updateRecordsPerPage}
+        <DataTableBody tableData={tableData} columnKeys={columnKeys}/>
+        {#if displayedRecordsPerPage > 0 && onPageChange && updateRecordsPerPage && tableData.length > 0}
             <tfoot>
                 <tr>
                     <td colspan={columns.length}>
