@@ -14,7 +14,6 @@
             stickyHeader = false, fetching = $bindable(false), totalRecords = 0, page = $bindable(0),  onPageChange, 
             selectedRecordsPerPage = $bindable(0), recordsPerPageSelection = $bindable([]),
             updateRecordsPerPage, paginationActiveBackgroundColor}: DataTableProps = $props();
-    const stickyHeaderClass: string = stickyHeader ? 'sticky top-0' : '';
     let columnDataMapping:ColumnDataMapping<Column> = $derived.by(() => {
         const dataMapping: ColumnDataMapping<Column> = {};
         columns.forEach((column) => {
@@ -72,13 +71,7 @@
         </div>
     {/if}
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 {stickyHeaderClass} z-2">
-            <tr>
-                {#each columnHeaders as header}
-                    <DataTableHeader header={header} />
-                {/each}
-            </tr>
-        </thead>
+        <DataTableHeader columnHeaders={columnHeaders} stickyHeader={stickyHeader} />
         <DataTableBody tableData={tableData} columnKeys={columnKeys}/>
         <DataTableFooter colspan={columns.length} selectedRecordsPerPage={selectedRecordsPerPage} totalRecords={totalRecords} recordsPerPageSelection={recordsPerPageSelection}
             updateRecordsPerPage={updateRecordsPerPage} paginationActiveBackgroundColor={paginationActiveBackgroundColor}

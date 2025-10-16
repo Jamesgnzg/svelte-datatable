@@ -51,7 +51,7 @@
       columns={[
         {
           accessor: 'name',
-          /* filter: nameFilterSnippet,
+/*           filter: nameFilterSnippet,
           filtering:  nameQuery !== '' */
         },
         {
