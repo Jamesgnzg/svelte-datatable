@@ -45,7 +45,7 @@
     </div>
   {/snippet}
 
-  <div class="p-5">
+  <div class="p-5 bg-gray-50 h-screen">
     <DataTable 
       bind:companies={records}
       columns={[

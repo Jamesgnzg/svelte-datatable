@@ -63,7 +63,7 @@
     }
 </script>
 
-<div class="relative shadow-md sm:rounded-lg">
+<div class="relative border border-gray-200 rounded-md">
     {#if fetching}
         <div role="status" class="absolute flex h-full w-full items-center justify-center bg-white opacity-55 z-10">
             <img src={Spinner} class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600" alt="Loading.."  />
