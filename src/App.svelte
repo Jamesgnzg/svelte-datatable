@@ -69,7 +69,7 @@
       totalRecords = {initialRecords.length}
       page = {page}
       onPageChange = {(selectedPage: number) => page = selectedPage}
-      displayedRecordsPerPage = {pageSize}
+      selectedRecordsPerPage = {pageSize}
       recordsPerPageSelection = {PAGE_SIZES}
       updateRecordsPerPage = {(newPageSize: number) => {
         page = 1;
