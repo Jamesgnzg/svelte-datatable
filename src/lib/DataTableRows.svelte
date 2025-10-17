@@ -6,10 +6,10 @@
     const displayCursor = rowExpansion ? 'cursor-pointer' : '';
     let showExpandedRow = $state(false);
 
-    const handleClick = () => showExpandedRow = !showExpandedRow
+    const toggleExpandedRow = () => showExpandedRow = !showExpandedRow
 </script>
 
-<tr class="border-b dark:border-gray-700 border-gray-200 {displayCursor}" onclick={handleClick}>
+<tr class="border-b dark:border-gray-700 border-gray-200 {displayCursor}" onclick={toggleExpandedRow}>
     {#each columnKeys as key}
         <td class="px-6 py-4">
             { data[key] }
