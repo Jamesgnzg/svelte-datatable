@@ -13,7 +13,7 @@
     const { companies = $bindable([]), columns, noRecordsMessage = "No records", 
             stickyHeader = false, fetching = $bindable(false), totalRecords = 0, page = $bindable(0),  onPageChange, 
             selectedRecordsPerPage = $bindable(0), recordsPerPageSelection = $bindable([]),
-            updateRecordsPerPage, paginationActiveBackgroundColor}: DataTableProps = $props();
+            updateRecordsPerPage, paginationActiveBackgroundColor, rowExpansion}: DataTableProps = $props();
     let columnDataMapping:ColumnDataMapping<Column> = $derived.by(() => {
         const dataMapping: ColumnDataMapping<Column> = {};
         columns.forEach((column) => {
@@ -70,9 +70,10 @@
             <span class="sr-only">Loading...</span>
         </div>
     {/if}
+
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <DataTableHeader columnHeaders={columnHeaders} stickyHeader={stickyHeader} />
-        <DataTableBody tableData={tableData} columnKeys={columnKeys}/>
+        <DataTableBody tableData={tableData} colspan={columns.length} columnKeys={columnKeys} rowExpansion={rowExpansion}/>
         <DataTableFooter colspan={columns.length} selectedRecordsPerPage={selectedRecordsPerPage} totalRecords={totalRecords} recordsPerPageSelection={recordsPerPageSelection}
             updateRecordsPerPage={updateRecordsPerPage} paginationActiveBackgroundColor={paginationActiveBackgroundColor}
             page={page} onPageChange={onPageChange} displayedRecords={ tableData.length > 0 } />

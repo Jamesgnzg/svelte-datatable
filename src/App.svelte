@@ -45,14 +45,21 @@
     </div>
   {/snippet}
 
-  <div class="p-5 bg-gray-50 h-screen">
+  {#snippet additionalDetails(company: company)}
+    <div class="flex flex-col">
+      <span>{company.name}</span>
+      {company.missionStatement}
+    </div>
+  {/snippet}
+
+  <div class="p-5 bg-white h-screen">
     <DataTable 
       bind:companies={records}
       columns={[
         {
           accessor: 'name',
-/*           filter: nameFilterSnippet,
-          filtering:  nameQuery !== '' */
+          filter: nameFilterSnippet,
+          filtering:  nameQuery !== ''
         },
         {
           accessor: 'streetAddress',
@@ -76,6 +83,7 @@
         pageSize = newPageSize;
       } }
       paginationActiveBackgroundColor = "bg-gray-200"
+      rowExpansion={additionalDetails}
     />
   </div>
 </main>

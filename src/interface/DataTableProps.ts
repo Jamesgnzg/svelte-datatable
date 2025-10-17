@@ -14,4 +14,5 @@ export interface DataTableProps {
   recordsPerPageSelection?: number[];
   updateRecordsPerPage?: (newPageSize: number) => void;
   paginationActiveBackgroundColor?: string;
+  rowExpansion?: Function;
 }
