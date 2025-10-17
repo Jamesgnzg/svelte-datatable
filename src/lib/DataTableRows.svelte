@@ -1,12 +1,14 @@
 <script lang="ts">
     import { slide } from "svelte/transition";
-    
+
     const {columnKeys, data, colspan, rowExpansion} = $props();
+    const displayCursor = rowExpansion ? 'cursor-pointer' : '';
     let showExpandedRow = $state(false);
+
     const handleClick = () => showExpandedRow = !showExpandedRow
 </script>
 
-<tr class=" border-b dark:border-gray-700 border-gray-200" onclick={handleClick}>
+<tr class="border-b dark:border-gray-700 border-gray-200 {displayCursor}" onclick={handleClick}>
     {#each columnKeys as key}
         <td class="px-6 py-4">
             { data[key] }
