@@ -72,6 +72,7 @@
           accessor: 'missionStatement',
         }
       ]}
+      striped = {true}
       stickyHeader = {true}
       totalRecords = {initialRecords.length}
       page = {page}

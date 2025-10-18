@@ -6,6 +6,7 @@ export interface DataTableProps {
   columns: Column[];
   noRecordsMessage?: string;
   stickyHeader?: boolean;
+  striped?: boolean;
   fetching?: boolean;
   totalRecords?: number;
   page?: number;
