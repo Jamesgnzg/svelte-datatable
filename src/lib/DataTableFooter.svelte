@@ -1,7 +1,9 @@
 <script lang="ts">
+  import type { DataTableFooterProps } from "../interface/DataTableFooterProps";
+
     const { colspan, selectedRecordsPerPage, totalRecords, recordsPerPageSelection,
     updateRecordsPerPage, paginationActiveBackgroundColor = "bg-orange-200",
-    page, onPageChange, displayedRecords}  = $props();
+    page = 0, onPageChange, displayedRecords }: DataTableFooterProps  = $props();
     const totalPages = $derived(Math.ceil(totalRecords / selectedRecordsPerPage));
 
     let shownRecordsPerPage = $state(selectedRecordsPerPage);
