@@ -73,7 +73,7 @@
 
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <DataTableHeader columnHeaders={columnHeaders} stickyHeader={stickyHeader} />
-        <DataTableBody striped={striped} tableData={tableData} colspan={columns.length} columnKeys={columnKeys} rowExpansion={rowExpansion} />
+        <DataTableBody striped={striped} tableData={tableData} colSpan={columns.length} columnKeys={columnKeys} rowExpansion={rowExpansion} />
         <DataTableFooter colspan={columns.length} selectedRecordsPerPage={selectedRecordsPerPage} totalRecords={totalRecords} recordsPerPageSelection={recordsPerPageSelection}
             updateRecordsPerPage={updateRecordsPerPage} paginationActiveBackgroundColor={paginationActiveBackgroundColor}
             page={page} onPageChange={onPageChange} displayedRecords={ tableData.length > 0 } />
