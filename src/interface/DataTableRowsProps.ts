@@ -1,10 +1,14 @@
+import type { DataTableBodyProps } from "./DataTableBodyProps";
 import type { TableData } from "./tableData";
 
-export interface DataTableRowsProps {
-  striped: boolean;
-  columnKeys: string[];
+type RowsInherited = Pick<
+  DataTableBodyProps,
+  "colSpan" | "columnKeys" | "striped" | "rowExpansion"
+>;
+
+interface RowsProps {
   index: number;
   data: TableData;
-  colspan: number;
-  rowExpansion?: Function;
 }
+
+export type DataTableRowsProps = RowsInherited & RowsProps;

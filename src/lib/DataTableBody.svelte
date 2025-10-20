@@ -7,6 +7,6 @@
 
 <tbody>
     {#each tableData as data, index}
-       <DataTableRows striped={striped} columnKeys={columnKeys} data={data} index={index} colspan={colSpan} rowExpansion={rowExpansion} />
+       <DataTableRows striped={striped} columnKeys={columnKeys} data={data} index={index} colSpan={colSpan} rowExpansion={rowExpansion} />
     {/each}
 </tbody>

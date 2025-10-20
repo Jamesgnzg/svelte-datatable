@@ -2,7 +2,7 @@
     import type { DataTableRowsProps } from "../interface/DataTableRowsProps";
     import { slide } from "svelte/transition";
 
-    const { striped, columnKeys, index, data, colspan, rowExpansion }: DataTableRowsProps = $props();
+    const { striped, columnKeys, index, data, colSpan, rowExpansion }: DataTableRowsProps = $props();
     const displayCursor = rowExpansion ? 'cursor-pointer' : '';
     const stripedBackground = striped && index % 2 !== 0 ? 'bg-gray-50': '';
     let showExpandedRow = $state(false);
@@ -20,7 +20,7 @@
 
 {#if rowExpansion && showExpandedRow}
     <tr class="border-b dark:border-gray-700 border-gray-200 {stripedBackground}" >
-        <td colspan={colspan}>
+        <td colspan={colSpan}>
             <div class="p-5" in:slide={{ duration: 330 }} out:slide>
                 {@render rowExpansion(data)}
             </div>
