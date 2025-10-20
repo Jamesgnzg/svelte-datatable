@@ -1,11 +1,19 @@
-export interface DataTableFooterProps {
+import type { DataTableProps } from "./DataTableProps";
+
+type FooterInherited = Pick<
+  DataTableProps,
+  | "selectedRecordsPerPage"
+  | "totalRecords"
+  | "recordsPerPageSelection"
+  | "updateRecordsPerPage"
+  | "paginationActiveBackgroundColor"
+  | "page"
+  | "onPageChange"
+>;
+
+interface FooterProps {
   colspan: number;
-  selectedRecordsPerPage: number;
-  totalRecords: number;
-  recordsPerPageSelection: number[];
-  updateRecordsPerPage?: (newPageSize: number) => void;
-  paginationActiveBackgroundColor?: string;
-  page?: number;
-  onPageChange?: Function;
   displayedRecords?: boolean;
 }
+
+export type DataTableFooterProps = FooterInherited & FooterProps;
