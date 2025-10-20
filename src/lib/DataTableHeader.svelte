@@ -1,10 +1,11 @@
 <script lang="ts">
-    import type { ColumnHeader } from "../interface/columnHeader";
+    import type { DataTableHeaderProps } from "../interface/DataTableHeaderProps";
     import { slide } from "svelte/transition";
     import filterIcon from "../assets/filter.png";
     import filterIconActive from "../assets/filter-active.png";
 
-    const { columnHeaders = $bindable([]), stickyHeader = false }: { columnHeaders: ColumnHeader[], stickyHeader: boolean} = $props();
+
+    const { columnHeaders = $bindable([]), stickyHeader = false }:DataTableHeaderProps = $props();
     const stickyHeaderClass: string = stickyHeader ? 'sticky top-0' : '';
 
     let showFilterPopover = $state(false);

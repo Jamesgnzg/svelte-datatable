@@ -1,6 +1,6 @@
 import type { DataTableProps } from "./DataTableProps";
 
-type FooterInherited = Pick<
+type TableProps = Pick<
   DataTableProps,
   | "selectedRecordsPerPage"
   | "totalRecords"
@@ -16,4 +16,4 @@ interface FooterProps {
   displayedRecords?: boolean;
 }
 
-export type DataTableFooterProps = FooterInherited & FooterProps;
+export type DataTableFooterProps = TableProps & FooterProps;

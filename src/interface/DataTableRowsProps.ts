@@ -1,7 +1,7 @@
 import type { DataTableBodyProps } from "./DataTableBodyProps";
 import type { TableData } from "./tableData";
 
-type RowsInherited = Pick<
+type TableProps = Pick<
   DataTableBodyProps,
   "colSpan" | "columnKeys" | "striped" | "rowExpansion"
 >;
@@ -11,4 +11,4 @@ interface RowsProps {
   data: TableData;
 }
 
-export type DataTableRowsProps = RowsInherited & RowsProps;
+export type DataTableRowsProps = TableProps & RowsProps;
